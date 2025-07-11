@@ -3,6 +3,6 @@ using Terraria.ModLoader;
 namespace ModJam;
 
 /// <summary>
-/// 1. 为敌人添加韧性条，击破后获得效果
+/// 1. 涓烘晫浜烘坊鍔犻煣鎬ф潯锛屽嚮鐮村悗鑾峰緱鏁堟灉
 /// </summary>
 public class ModJam : Mod;
