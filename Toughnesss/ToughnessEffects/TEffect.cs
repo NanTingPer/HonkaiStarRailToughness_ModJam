@@ -13,7 +13,9 @@ public abstract class TEffect : GlobalNPC
         { ToughnessTypes.物理, (npc) => npc.GetGlobalNPC<PhysicalEffect>() },
         { ToughnessTypes.冰, (npc) => npc.GetGlobalNPC<IceEffect>() },
         { ToughnessTypes.风, (npc) => npc.GetGlobalNPC<WindEffect>() },
-        { ToughnessTypes.火, (npc) => npc.GetGlobalNPC<FirEffect>() }
+        { ToughnessTypes.火, (npc) => npc.GetGlobalNPC<FirEffect>() },
+        { ToughnessTypes.量子, (npc) => npc.GetGlobalNPC<QuantumEffect>() },
+        { ToughnessTypes.虚数, (npc) => npc.GetGlobalNPC<ImaginaryEffect>() }
     };
 
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Terraria.ModLoader;
 using Terraria;
 using static ModJam.Toughnesss.ToughnessTextures;
+using System;
+using System.Linq;
 
 namespace ModJam.Toughnesss;
 /// <summary>
@@ -18,12 +20,21 @@ public class ToughnessNPC : GlobalNPC
     public override void SetDefaults(NPC entity)
     {
         var tougnpc = entity.GetGlobalNPC<ToughnessNPC>();
-        tougnpc.types = [
-            ToughnessTypes.风,
-            ToughnessTypes.冰,
-            ToughnessTypes.火,
-            ToughnessTypes.物理,
-        ];
+        if (entity.friendly) {
+            tougnpc.isResilient = false;
+            return;
+        }
+
+        //给予三个弱点
+        var enumType = typeof(ToughnessTypes);
+        var values = Enum.GetValues(enumType);
+        IEnumerable<int> list = [];
+        for (int i = 0; list.Count() < 3; i++) {
+            list = list.Append(rand.Next(0, values.Length));
+            list = list.Distinct();
+        }
+        tougnpc.types.Clear();
+        tougnpc.types.AddRange(list.Select(i => (ToughnessTypes)i));
         currentLenght = lengthMax;
         base.SetDefaults(entity);
     }
@@ -35,7 +46,7 @@ public class ToughnessNPC : GlobalNPC
     /// <summary>
     /// 此NPC拥有的弱点
     /// </summary>
-    public List<ToughnessTypes> types = [];
+    public readonly List<ToughnessTypes> types = [];
     /// <summary>
     /// 最大韧性长度
     /// </summary>
@@ -50,26 +61,27 @@ public class ToughnessNPC : GlobalNPC
     public int paralysisTime = 60;
     public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
-        float imageSize = 20f;
-        float imageFontRatio = 100f; //图片缩放比例
-        var toughnessDrawPostition = npc.position + new Vector2(-40, -40);
-        foreach (var toughnessType in types) {
-            if(Textures.TryGetValue(toughnessType, out var texture)) {
-                toughnessDrawPostition.X += 20f;
-                spriteBatch.Draw(texture.Value, toughnessDrawPostition - screenPos, null, White, 0f, Zero, imageSize / imageFontRatio, SpriteEffects.None, 1f);
+        if (isResilient) {
+            float imageSize = 20f;
+            float imageFontRatio = 100f; //图片缩放比例
+            var toughnessDrawPostition = npc.position + new Vector2(-40, -npc.height);
+            foreach (var toughnessType in types) {
+                if (Textures.TryGetValue(toughnessType, out var texture)) {
+                    toughnessDrawPostition.X += 20f;
+                    spriteBatch.Draw(texture.Value, toughnessDrawPostition - screenPos, null, White, 0f, Zero, imageSize / imageFontRatio, SpriteEffects.None, 1f);
+                }
             }
+
+
+            //条的宽度 => 100
+            //    高度 => 5
+            var bareakTheBarDrawPostition = npc.position + new Vector2(-20, -20) - screenPos;
+            var whiteRectangle = new Rectangle((int)bareakTheBarDrawPostition.X, (int)bareakTheBarDrawPostition.Y, 1, 1);
+            whiteRectangle.Width = (int)(BreakTheBar.Width() / 100f * (currentLenght / (float)lengthMax));
+            whiteRectangle.Height = BreakTheBar.Height() / 100;
+            spriteBatch.Draw(WhiteTexture, whiteRectangle, White);
+            spriteBatch.Draw(BreakTheBar.Value, bareakTheBarDrawPostition, null, White, 0f, Zero, 0.01f, SpriteEffects.None, 1f);
         }
-
-
-        //条的宽度 => 100
-        //    高度 => 5
-        var bareakTheBarDrawPostition = npc.position + new Vector2(-20, -20) - screenPos;
-        var whiteRectangle = new Rectangle((int)bareakTheBarDrawPostition.X, (int)bareakTheBarDrawPostition.Y, 1,1);
-        whiteRectangle.Width = (int)(BreakTheBar.Width() / 100f * (currentLenght / (float)lengthMax));
-        whiteRectangle.Height = BreakTheBar.Height() / 100;
-        spriteBatch.Draw(WhiteTexture, whiteRectangle, White);
-        spriteBatch.Draw(BreakTheBar.Value, bareakTheBarDrawPostition, null, White, 0f, Zero, 0.01f, SpriteEffects.None, 1f);
-
         return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
     }
 
