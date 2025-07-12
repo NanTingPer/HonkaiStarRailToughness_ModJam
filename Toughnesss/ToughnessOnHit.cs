@@ -16,7 +16,7 @@ public class ToughnessOnHit : GlobalNPC
         //在这里进行削韧
         if (tougNpc.ContainToughness(item, out var type) && 
             tougNpc.currentLenght > 0) {
-            tougNpc.currentLenght -= 1;
+            tougNpc.currentLenght -= 1 * player.GetModPlayer<ToughnessPlayer>().killEfficiency;
             if(tougNpc.currentLenght <= 0) {
                 //apply
                 if(TEffect.Applys.TryGetValue(type, out var value)){
@@ -36,7 +36,18 @@ public class ToughnessOnHit : GlobalNPC
         //在这里进行削韧
         if (tougNpc.ContainToughness(projectile, out var type) && 
             tougNpc.currentLenght > 0) {
-            tougNpc.currentLenght -= 1;
+
+            if (projectile.owner > player.Length) {
+                tougNpc.currentLenght -= 1;
+            }
+            else {
+                try {
+                    var pla = player[projectile.owner];
+                    tougNpc.currentLenght -= 1 * pla.GetModPlayer<ToughnessPlayer>().killEfficiency;
+                } catch {
+                    tougNpc.currentLenght -= 1;
+                }
+            }
             if(tougNpc.currentLenght <= 0) {
                 //apply
                 if (TEffect.Applys.TryGetValue(type, out var value)) {

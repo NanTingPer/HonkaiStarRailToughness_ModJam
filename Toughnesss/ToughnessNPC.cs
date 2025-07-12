@@ -50,11 +50,11 @@ public class ToughnessNPC : GlobalNPC
     /// <summary>
     /// 最大韧性长度
     /// </summary>
-    public int lengthMax = 10;
+    public float lengthMax = 10;
     /// <summary>
     /// 当前韧性长度
     /// </summary>
-    public int currentLenght = 10;
+    public float currentLenght = 10;
     /// <summary>
     /// 瘫痪时间
     /// </summary>
