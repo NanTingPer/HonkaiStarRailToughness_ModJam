@@ -8,7 +8,7 @@ namespace ModJam.Toughnesss;
 public class ToughnessItem : GlobalItem
 {
     public override bool InstancePerEntity => true;
-    public ToughnessTypes type = ToughnessTypes.冰;
+    public ToughnessTypes type = ToughnessTypes.风;
 
     public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
     {

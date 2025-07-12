@@ -10,6 +10,11 @@ namespace ModJam.Toughnesss;
 /// </summary>
 public class ToughnessNPC : GlobalNPC
 {
+    /// <summary>
+    /// 非破韧伤害只生效比例
+    /// </summary>
+    public const float NONBREAKINGDAMAGEIMMUNITY = 0.8F;
+
     public override void SetDefaults(NPC entity)
     {
         var tougnpc = entity.GetGlobalNPC<ToughnessNPC>();
@@ -82,6 +87,20 @@ public class ToughnessNPC : GlobalNPC
         return types.Contains(type);
     }
 
+    public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
+    {
+        if (!ContainToughness(item, out _)) {
+            modifiers.FinalDamage *= NONBREAKINGDAMAGEIMMUNITY;
+        }
+        base.ModifyHitByItem(npc, player, item, ref modifiers);
+    }
 
+    public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
+    {
+        if (!ContainToughness(projectile, out _)) {
+            modifiers.FinalDamage *= NONBREAKINGDAMAGEIMMUNITY;
+        }
+        base.ModifyHitByProjectile(npc, projectile, ref modifiers);
+    }
     public override bool InstancePerEntity => true;
 }

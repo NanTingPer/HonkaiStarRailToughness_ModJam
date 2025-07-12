@@ -11,7 +11,8 @@ public abstract class TEffect : GlobalNPC
     public static Dictionary<ToughnessTypes, Func<NPC, TEffect>> Applys { get; } = new()
     {
         { ToughnessTypes.物理, (npc) => npc.GetGlobalNPC<PhysicalEffect>() },
-        { ToughnessTypes.冰, (npc) => npc.GetGlobalNPC<IceEffect>() }
+        { ToughnessTypes.冰, (npc) => npc.GetGlobalNPC<IceEffect>() },
+        { ToughnessTypes.风, (npc) => npc.GetGlobalNPC<WindEffect>() }
     };
 
 

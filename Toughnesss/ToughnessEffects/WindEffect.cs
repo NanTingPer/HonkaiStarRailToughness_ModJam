@@ -3,10 +3,7 @@ using Terraria.GameContent.Drawing;
 
 namespace ModJam.Toughnesss.ToughnessEffects;
 
-/// <summary>
-/// 物理
-/// </summary>
-public class PhysicalEffect : TEffect
+public class WindEffect : TEffect
 {
     /// <summary>
     /// 处于瘫痪时，受到的伤害 += 120%
@@ -37,7 +34,7 @@ public class PhysicalEffect : TEffect
     protected override void EndEffect(NPC npc)
     {
         ParticleOrchestrator.RequestParticleSpawn(false,
-            ParticleOrchestraType.StellarTune,
+            ParticleOrchestraType.Keybrand,
             new ParticleOrchestraSettings()
             {
                 PositionInWorld = npc.Center,
@@ -46,7 +43,7 @@ public class PhysicalEffect : TEffect
         //npc.StrikeNPC();
         npc.life -= damage * 2;
         var rect = new Rectangle((int)npc.position.X, (int)npc.position.Y, 20, 20);
-        CombatText.NewText(rect, WhiteSmoke, damage * 2);
+        CombatText.NewText(rect, Green, damage * 2);
         base.EndEffect(npc);
     }
 }
