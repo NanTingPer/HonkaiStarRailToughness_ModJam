@@ -13,7 +13,7 @@ public class ToughnessNPC : GlobalNPC
     /// <summary>
     /// 非破韧伤害只生效比例
     /// </summary>
-    public const float NONBREAKINGDAMAGEIMMUNITY = 0.8F;
+    public const float NONBREAKINGDAMAGEIMMUNITY = 0.2F;
 
     public override void SetDefaults(NPC entity)
     {
@@ -21,7 +21,8 @@ public class ToughnessNPC : GlobalNPC
         tougnpc.types = [
             ToughnessTypes.风,
             ToughnessTypes.冰,
-            ToughnessTypes.物理
+            ToughnessTypes.火,
+            ToughnessTypes.物理,
         ];
         currentLenght = lengthMax;
         base.SetDefaults(entity);
@@ -30,7 +31,7 @@ public class ToughnessNPC : GlobalNPC
     /// <summary>
     /// 是否是含有弱点的NPC
     /// </summary>
-    public bool isResilient = false;
+    public bool isResilient = true;
     /// <summary>
     /// 此NPC拥有的弱点
     /// </summary>
@@ -51,12 +52,10 @@ public class ToughnessNPC : GlobalNPC
     {
         float imageSize = 20f;
         float imageFontRatio = 100f; //图片缩放比例
-        float toughnessOffset = 0f;
-        var toughnessDrawPostition = npc.position + new Vector2(-20, -40);
+        var toughnessDrawPostition = npc.position + new Vector2(-40, -40);
         foreach (var toughnessType in types) {
             if(Textures.TryGetValue(toughnessType, out var texture)) {
-                toughnessDrawPostition += new Vector2(toughnessOffset * imageSize, 0);
-                toughnessOffset += 1f;
+                toughnessDrawPostition.X += 20f;
                 spriteBatch.Draw(texture.Value, toughnessDrawPostition - screenPos, null, White, 0f, Zero, imageSize / imageFontRatio, SpriteEffects.None, 1f);
             }
         }
@@ -89,7 +88,7 @@ public class ToughnessNPC : GlobalNPC
 
     public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
     {
-        if (!ContainToughness(item, out _)) {
+        if (!ContainToughness(item, out _) && isResilient) {
             modifiers.FinalDamage *= NONBREAKINGDAMAGEIMMUNITY;
         }
         base.ModifyHitByItem(npc, player, item, ref modifiers);
@@ -97,7 +96,7 @@ public class ToughnessNPC : GlobalNPC
 
     public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
     {
-        if (!ContainToughness(projectile, out _)) {
+        if (!ContainToughness(projectile, out _) && isResilient) {
             modifiers.FinalDamage *= NONBREAKINGDAMAGEIMMUNITY;
         }
         base.ModifyHitByProjectile(npc, projectile, ref modifiers);

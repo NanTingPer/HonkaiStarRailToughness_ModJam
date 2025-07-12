@@ -1,9 +1,11 @@
-﻿using Terraria;
+﻿using Microsoft.Xna.Framework.Graphics;
+using Terraria;
 using Terraria.GameContent.Drawing;
+using Terraria.ID;
 
 namespace ModJam.Toughnesss.ToughnessEffects;
 
-public class WindEffect : TEffect
+public class FirEffect : TEffect
 {
     /// <summary>
     /// 处于瘫痪时，受到的伤害 += 120%
@@ -21,6 +23,15 @@ public class WindEffect : TEffect
         modifiers.FinalDamage *= 1f + 0.2f;
     }
 
+    protected override void SelfDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+    {
+        var rom = npc.position + RandomVector2(rand, -npc.height, npc.height);
+        var dust = Dust.NewDustPerfect(rom, DustID.Firefly);
+        dust.noGravity = true;
+        dust.velocity = Zero;
+        base.SelfDraw(npc, spriteBatch, screenPos, drawColor);
+    }
+
     protected override void SelfApply(NPC npc, Projectile proj)
     {
     }
@@ -32,7 +43,7 @@ public class WindEffect : TEffect
     protected override void EndEffect(NPC npc)
     {
         ParticleOrchestrator.RequestParticleSpawn(false,
-            ParticleOrchestraType.Keybrand,
+            ParticleOrchestraType.StellarTune,
             new ParticleOrchestraSettings()
             {
                 PositionInWorld = npc.Center,
@@ -41,7 +52,8 @@ public class WindEffect : TEffect
         //npc.StrikeNPC();
         npc.life -= damage * 2;
         var rect = new Rectangle((int)npc.position.X, (int)npc.position.Y, 20, 20);
-        CombatText.NewText(rect, Green, damage * 2);
+        CombatText.NewText(rect, Color.DarkRed, damage * 2);
         base.EndEffect(npc);
     }
+
 }

@@ -11,19 +11,17 @@ public class PhysicalEffect : TEffect
     /// <summary>
     /// 处于瘫痪时，受到的伤害 += 120%
     /// </summary>
-    public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
+    protected override void SelfModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
     {
         modifiers.FinalDamage *= 1f + 0.2f;
-        base.ModifyHitByItem(npc, player, item, ref modifiers);
     }
 
     /// <summary>
     /// 处于瘫痪时，受到的伤害 += 120%
     /// </summary>
-    public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
+    protected override void SelfModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
     {
         modifiers.FinalDamage *= 1f + 0.2f;
-        base.ModifyHitByProjectile(npc, projectile, ref modifiers);
     }
 
     protected override void SelfApply(NPC npc, Projectile proj)

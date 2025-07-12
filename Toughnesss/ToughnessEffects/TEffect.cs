@@ -12,7 +12,8 @@ public abstract class TEffect : GlobalNPC
     {
         { ToughnessTypes.物理, (npc) => npc.GetGlobalNPC<PhysicalEffect>() },
         { ToughnessTypes.冰, (npc) => npc.GetGlobalNPC<IceEffect>() },
-        { ToughnessTypes.风, (npc) => npc.GetGlobalNPC<WindEffect>() }
+        { ToughnessTypes.风, (npc) => npc.GetGlobalNPC<WindEffect>() },
+        { ToughnessTypes.火, (npc) => npc.GetGlobalNPC<FirEffect>() }
     };
 
 
@@ -79,6 +80,33 @@ public abstract class TEffect : GlobalNPC
             return SelfPreAI(npc);
         }
         return base.PreAI(npc);
+    }
+
+    public sealed override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
+    {
+        if(time > 0) {
+            SelfModifyHitByItem(npc, player, item, ref modifiers);
+        }
+        base.ModifyHitByItem(npc, player, item, ref modifiers);
+    }
+
+    public sealed override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
+    {
+        if(time > 0) {
+            SelfModifyHitByProjectile(npc, projectile, ref modifiers);
+        }
+        base.ModifyHitByProjectile(npc, projectile, ref modifiers);
+    }
+
+
+    protected virtual void SelfModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
+    {
+
+    }
+
+    protected virtual void SelfModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
+    {
+
     }
 
     /// <summary>
