@@ -6,22 +6,18 @@ using Terraria;
 
 namespace ModJam.Toughnesss.ToughnessEffects;
 
+/// <summary>
+/// 虚数
+/// </summary>
 public class ImaginaryEffect : TEffect
 {
     /// <summary>
-    /// 处于瘫痪时，受到的伤害 += 120%
+    /// 减速
     /// </summary>
-    protected override void SelfModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
+    protected override void SelfAI(NPC npc)
     {
-        modifiers.FinalDamage *= 1f + 0.2f;
-    }
-
-    /// <summary>
-    /// 处于瘫痪时，受到的伤害 += 120%
-    /// </summary>
-    protected override void SelfModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
-    {
-        modifiers.FinalDamage *= 1f + 0.2f;
+        npc.velocity *= 0.8f;
+        base.SelfAI(npc);
     }
 
     protected override void SelfDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
@@ -34,14 +30,6 @@ public class ImaginaryEffect : TEffect
         base.SelfDraw(npc, spriteBatch, screenPos, drawColor);
     }
 
-    protected override void SelfApply(NPC npc, Projectile proj)
-    {
-    }
-
-    protected override void SelfApply(NPC npc, Item item)
-    {
-    }
-
     protected override void EndEffect(NPC npc)
     {
         ParticleOrchestrator.RequestParticleSpawn(false,
@@ -52,11 +40,18 @@ public class ImaginaryEffect : TEffect
             }
         );
         //npc.StrikeNPC();
-        npc.SubNPCLife(damage * 2);
-        var rect = new Rectangle((int)npc.position.X, (int)npc.position.Y, 20, 20);
-        CombatText.NewText(rect, YellowGreen, damage * 2);
         npc.rotation = 0f;
         base.EndEffect(npc);
     }
+    protected override void SelfApply(NPC npc, Projectile proj)
+    {
+        time = 120;
+    }
+
+    protected override void SelfApply(NPC npc, Item item)
+    {
+        time = 120;
+    }
+
 
 }

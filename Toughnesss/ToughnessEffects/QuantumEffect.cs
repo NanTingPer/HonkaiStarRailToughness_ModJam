@@ -5,22 +5,25 @@ using Terraria.ID;
 
 namespace ModJam.Toughnesss.ToughnessEffects;
 
+/// <summary>
+/// 量子
+/// </summary>
 public class QuantumEffect : TEffect
 {    
     /// <summary>
-    /// 处于瘫痪时，受到的伤害 += 120%
+    /// 处于瘫痪时，额外受伤
     /// </summary>
     protected override void SelfModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
     {
-        modifiers.FinalDamage *= 1f + 0.2f;
+        npc.SubNPCLife(item.damage * 0.4f, color: Blue);
     }
 
     /// <summary>
-    /// 处于瘫痪时，受到的伤害 += 120%
+    /// 处于瘫痪时，额外受伤
     /// </summary>
     protected override void SelfModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
     {
-        modifiers.FinalDamage *= 1f + 0.2f;
+        npc.SubNPCLife(projectile.damage * 0.4f, color: Blue);
     }
 
     protected override void SelfDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
@@ -34,10 +37,12 @@ public class QuantumEffect : TEffect
 
     protected override void SelfApply(NPC npc, Projectile proj)
     {
+        time = 60;
     }
 
     protected override void SelfApply(NPC npc, Item item)
     {
+        time = 60;
     }
 
     protected override void EndEffect(NPC npc)
@@ -50,9 +55,7 @@ public class QuantumEffect : TEffect
             }
         );
         //npc.StrikeNPC();
-        npc.SubNPCLife(damage * 2);
-        var rect = new Rectangle((int)npc.position.X, (int)npc.position.Y, 20, 20);
-        CombatText.NewText(rect, Blue, damage * 2);
+        npc.SubNPCLife(damage * 0.6f, color: Blue);
         base.EndEffect(npc);
     }
 

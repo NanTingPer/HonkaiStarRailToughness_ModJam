@@ -5,24 +5,11 @@ using Terraria.ID;
 
 namespace ModJam.Toughnesss.ToughnessEffects;
 
+/// <summary>
+/// 雷
+/// </summary>
 public class LightningEffect : TEffect
 {    
-    /// <summary>
-    /// 处于瘫痪时，受到的伤害 += 120%
-    /// </summary>
-    protected override void SelfModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
-    {
-        modifiers.FinalDamage *= 1f + 0.2f;
-    }
-
-    /// <summary>
-    /// 处于瘫痪时，受到的伤害 += 120%
-    /// </summary>
-    protected override void SelfModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
-    {
-        modifiers.FinalDamage *= 1f + 0.2f;
-    }
-
     protected override void SelfDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
         var rom = npc.position + RandomVector2(rand, -npc.height, npc.height);
@@ -34,10 +21,12 @@ public class LightningEffect : TEffect
 
     protected override void SelfApply(NPC npc, Projectile proj)
     {
+        time = 10;
     }
 
     protected override void SelfApply(NPC npc, Item item)
     {
+        time = 10;
     }
 
     protected override void EndEffect(NPC npc)
@@ -50,9 +39,8 @@ public class LightningEffect : TEffect
             }
         );
         //npc.StrikeNPC();
-        npc.SubNPCLife(damage * 2);
-        var rect = new Rectangle((int)npc.position.X, (int)npc.position.Y, 20, 20);
-        CombatText.NewText(rect, Violet, damage * 2);
+        npc.SubNPCLife(damage * 2, color: Violet);
+        npc.SubNPCLife(damage * 2, color: Violet);
         base.EndEffect(npc);
     }
 

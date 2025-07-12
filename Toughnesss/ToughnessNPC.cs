@@ -5,6 +5,9 @@ using Terraria;
 using static ModJam.Toughnesss.ToughnessTextures;
 using System;
 using System.Linq;
+using Terraria.ModLoader.IO;
+using System.IO;
+using ModJam.Nets;
 
 namespace ModJam.Toughnesss;
 /// <summary>
@@ -50,15 +53,30 @@ public class ToughnessNPC : GlobalNPC
     /// <summary>
     /// 最大韧性长度
     /// </summary>
+    [NetField]
     public float lengthMax = 10;
     /// <summary>
     /// 当前韧性长度
     /// </summary>
+    [NetField]
     public float currentLenght = 10;
     /// <summary>
     /// 瘫痪时间
     /// </summary>
+    [NetField]
     public int paralysisTime = 10;
+
+    public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+    {
+        base.SendExtraAI(npc, bitWriter, binaryWriter);
+    }
+
+    public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+    {
+        base.ReceiveExtraAI(npc, bitReader, binaryReader);
+    }
+
+
     public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
         if (isResilient) {

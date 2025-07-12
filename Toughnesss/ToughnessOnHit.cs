@@ -1,7 +1,9 @@
 ﻿using ModJam.Toughnesss.ToughnessEffects;
 using System.Collections.Generic;
+using System.IO;
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace ModJam.Toughnesss;
 
@@ -60,7 +62,7 @@ public class ToughnessOnHit : GlobalNPC
                     tougNpc.currentLenght -= 0.5f;
                 }
             }
-            if(tougNpc.currentLenght <= 0) {
+            if (tougNpc.currentLenght <= 0) {
                 //apply
                 if (TEffect.Applys.TryGetValue(type, out var value)) {
                     value.Invoke(npc).Apply(npc, projectile);

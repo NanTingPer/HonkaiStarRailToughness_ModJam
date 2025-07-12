@@ -1,10 +1,11 @@
 ﻿using Terraria;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ModJam.Toughnesss.ToughnessEffects;
 
 public static class ToughnessKillNPC
 {
-    public static void SubNPCLife(this NPC npc, int life)
+    public static void SubNPCLife(this NPC npc, int life, bool upFont = true, Color color = default)
     {
         if(npc.life - life <= 0) {
             npc.NPCLoot();
@@ -12,6 +13,13 @@ public static class ToughnessKillNPC
         } else {
             npc.life -= life;
         }
-
+        if (upFont) {
+            var rect = new Rectangle((int)npc.position.X, (int)npc.position.Y, 20, 20);
+            CombatText.NewText(rect, color, life);
+        }
     }
+
+    public static void SubNPCLife(this NPC npc, float life, bool upFont = true, Color color = default) => 
+        npc.SubNPCLife((int)life, upFont, color);
+
 }
