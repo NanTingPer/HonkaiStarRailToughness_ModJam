@@ -49,6 +49,4 @@ public class PhysicalEffect : TEffect
         CombatText.NewText(rect, WhiteSmoke, damage * 2);
         base.EndEffect(npc);
     }
-
-    public override bool InstancePerEntity => true;
 }

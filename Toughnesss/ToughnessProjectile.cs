@@ -12,7 +12,7 @@ public class ToughnessProjectile : GlobalProjectile
     {
         if(source is EntitySource_ItemUse itemSource) {
             var projSpawnItem = itemSource.Item;
-            var toughessType = projSpawnItem.GetGlobalItem<ToughnessItem>().Type;
+            var toughessType = projSpawnItem.GetGlobalItem<ToughnessItem>().type;
             Type = toughessType;
         }
         base.OnSpawn(projectile, source);

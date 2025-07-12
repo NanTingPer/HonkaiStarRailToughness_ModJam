@@ -21,6 +21,8 @@ public class ToughnessOnHit : GlobalNPC
                 //apply
                 if(TEffect.Applys.TryGetValue(type, out var value)){
                     value.Invoke(npc).Apply(npc, item);
+                } else {
+                    tougNpc.currentLenght = tougNpc.lengthMax;
                 }
             }
         }
@@ -39,6 +41,8 @@ public class ToughnessOnHit : GlobalNPC
                 //apply
                 if (TEffect.Applys.TryGetValue(type, out var value)) {
                     value.Invoke(npc).Apply(npc, projectile);
+                } else { //防止没有找到对于的元素而永远无法被削韧
+                    tougNpc.currentLenght = tougNpc.lengthMax;
                 }
             }
         }

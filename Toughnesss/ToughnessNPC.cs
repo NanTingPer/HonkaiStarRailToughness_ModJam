@@ -18,6 +18,7 @@ public class ToughnessNPC : GlobalNPC
             ToughnessTypes.冰,
             ToughnessTypes.物理
         ];
+        currentLenght = lengthMax;
         base.SetDefaults(entity);
     }
     
@@ -32,11 +33,11 @@ public class ToughnessNPC : GlobalNPC
     /// <summary>
     /// 最大韧性长度
     /// </summary>
-    public int lengthMax = 100;
+    public int lengthMax = 10;
     /// <summary>
     /// 当前韧性长度
     /// </summary>
-    public int currentLenght = 100;
+    public int currentLenght = 10;
     /// <summary>
     /// 瘫痪时间
     /// </summary>
@@ -48,7 +49,7 @@ public class ToughnessNPC : GlobalNPC
         float toughnessOffset = 0f;
         var toughnessDrawPostition = npc.position + new Vector2(-20, -40);
         foreach (var toughnessType in types) {
-            if(Textures.TryGetValue(toughnessType.ToString(), out var texture)) {
+            if(Textures.TryGetValue(toughnessType, out var texture)) {
                 toughnessDrawPostition += new Vector2(toughnessOffset * imageSize, 0);
                 toughnessOffset += 1f;
                 spriteBatch.Draw(texture.Value, toughnessDrawPostition - screenPos, null, White, 0f, Zero, imageSize / imageFontRatio, SpriteEffects.None, 1f);
@@ -71,7 +72,7 @@ public class ToughnessNPC : GlobalNPC
     public bool ContainToughness(Item item, out ToughnessTypes type)
     {
         var tougItem = item.GetGlobalItem<ToughnessItem>();
-        type = tougItem.Type;
+        type = tougItem.type;
         return types.Contains(type);
     }
     public bool ContainToughness(Projectile projectile, out ToughnessTypes type)

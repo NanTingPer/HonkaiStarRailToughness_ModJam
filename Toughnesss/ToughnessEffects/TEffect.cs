@@ -10,7 +10,8 @@ public abstract class TEffect : GlobalNPC
 {
     public static Dictionary<ToughnessTypes, Func<NPC, TEffect>> Applys { get; } = new()
     {
-        { ToughnessTypes.物理, (npc) => npc.GetGlobalNPC<PhysicalEffect>() }
+        { ToughnessTypes.物理, (npc) => npc.GetGlobalNPC<PhysicalEffect>() },
+        { ToughnessTypes.冰, (npc) => npc.GetGlobalNPC<IceEffect>() }
     };
 
 
@@ -44,13 +45,7 @@ public abstract class TEffect : GlobalNPC
     public sealed override void AI(NPC npc)
     {
         if(time > 0) {
-            time -= 1;
             SelfAI(npc);
-            if(time <= 0) { //退出效果时
-                var tougNPC = npc.GetGlobalNPC<ToughnessNPC>();
-                tougNPC.currentLenght = tougNPC.lengthMax;
-                EndEffect(npc);
-            }
         }
         base.AI(npc);
     }
@@ -61,6 +56,28 @@ public abstract class TEffect : GlobalNPC
             SelfDraw(npc, spriteBatch, screenPos, drawColor);
         }
         base.PostDraw(npc, spriteBatch, screenPos, drawColor);
+    }
+
+    public sealed override void PostAI(NPC npc)
+    {
+        if (time > 0) {
+            SelfPostAI(npc);
+            time -= 1;
+            if (time <= 0) { //退出效果时
+                var tougNPC = npc.GetGlobalNPC<ToughnessNPC>();
+                tougNPC.currentLenght = tougNPC.lengthMax;
+                EndEffect(npc);
+            }
+        }
+        base.PostAI(npc);
+    }
+
+    public sealed override bool PreAI(NPC npc)
+    {
+        if (time > 0) {
+            return SelfPreAI(npc);
+        }
+        return base.PreAI(npc);
     }
 
     /// <summary>
@@ -74,9 +91,22 @@ public abstract class TEffect : GlobalNPC
     /// <summary>
     /// 击破效果被触发时的AI
     /// </summary>
+    /// <returns>是否执行原有AI</returns>
     protected virtual void SelfAI(NPC npc)
     {
+    }
 
+    /// <summary>
+    /// 如果不要AI执行，请手动设置 PreAI返回false
+    /// </summary>
+    protected virtual void SelfPostAI(NPC npc)
+    {
+
+    }
+
+    protected virtual bool SelfPreAI(NPC npc)
+    {
+        return true;
     }
 
     /// <summary>
@@ -92,4 +122,6 @@ public abstract class TEffect : GlobalNPC
         var gnpc = npc.GetGlobalNPC<ToughnessNPC>();
         time = gnpc.paralysisTime;
     }
+
+    public sealed override bool InstancePerEntity => true;
 }
