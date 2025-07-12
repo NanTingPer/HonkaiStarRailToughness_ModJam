@@ -1,5 +1,6 @@
-﻿using Terraria;
-using static System.Net.Mime.MediaTypeNames;
+﻿using System.IO;
+using Terraria;
+using Terraria.ModLoader.IO;
 
 namespace ModJam.Toughnesss.ToughnessEffects;
 
@@ -13,6 +14,9 @@ public static class ToughnessKillNPC
         } else {
             npc.life -= life;
         }
+
+        NetMessage.SendStrikeNPC(npc, new NPC.HitInfo() { Damage = life});
+
         if (upFont) {
             var rect = new Rectangle((int)npc.position.X, (int)npc.position.Y, 20, 20);
             CombatText.NewText(rect, color, life);

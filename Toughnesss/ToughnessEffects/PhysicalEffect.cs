@@ -1,5 +1,7 @@
-﻿using Terraria;
+﻿using System.IO;
+using Terraria;
 using Terraria.GameContent.Drawing;
+using Terraria.ModLoader.IO;
 
 namespace ModJam.Toughnesss.ToughnessEffects;
 

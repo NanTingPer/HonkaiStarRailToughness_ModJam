@@ -1,8 +1,11 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using ModJam.Nets;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace ModJam.Toughnesss.ToughnessEffects;
 
@@ -19,11 +22,12 @@ public abstract class TEffect : GlobalNPC
         { ToughnessTypes.雷, (npc) => npc.GetGlobalNPC<LightningEffect>() }
     };
 
-
+    [NetField]
     public int time = -1;
     /// <summary>
     /// 陷入瘫痪时候武器的攻击力
     /// </summary>
+    [NetField]
     public int damage = 0;
 
     /// <summary>
@@ -34,12 +38,14 @@ public abstract class TEffect : GlobalNPC
         SetTime(npc);
         damage = proj.damage;
         SelfApply(npc, proj);
+        npc.netUpdate = true;
     }
     public void Apply(NPC npc, Item item)
     {
         SetTime(npc);
         damage = item.damage;
         SelfApply(npc, item);
+        npc.netUpdate = true;
     }
 
 
@@ -156,4 +162,14 @@ public abstract class TEffect : GlobalNPC
     }
 
     public sealed override bool InstancePerEntity => true;
+
+    public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+    {
+        base.ReceiveExtraAI(npc, bitReader, binaryReader);
+    }
+
+    public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+    {
+        base.SendExtraAI(npc, bitWriter, binaryWriter);
+    }
 }

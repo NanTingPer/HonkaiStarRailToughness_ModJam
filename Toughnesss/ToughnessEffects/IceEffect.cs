@@ -1,5 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using ModJam.Nets;
+using System.IO;
 using Terraria;
+using Terraria.ModLoader.IO;
 
 namespace ModJam.Toughnesss.ToughnessEffects;
 
@@ -11,7 +14,8 @@ public class IceEffect : TEffect
     /// <summary>
     /// 被冻住的位置
     /// </summary>
-    public Vector2 nailPosition;
+    [NetField]
+    public Vector2 nailPosition = Zero;
 
     protected override void SelfApply(NPC npc, Projectile proj)
     {
@@ -49,4 +53,18 @@ public class IceEffect : TEffect
         npc.Center = nailPosition;
         base.SelfPostAI(npc);
     }
+
+    //public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+    //{
+    //    binaryWriter.WriteVector2(nailPosition);
+    //    binaryWriter.Write(time);
+    //    binaryWriter.Write(damage);
+    //}
+    //
+    //public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+    //{
+    //    nailPosition = binaryReader.ReadVector2();
+    //    time = binaryReader.ReadInt32();
+    //    damage = binaryReader.ReadInt32();
+    //}
 }

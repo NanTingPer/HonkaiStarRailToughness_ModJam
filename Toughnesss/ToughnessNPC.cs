@@ -5,9 +5,9 @@ using Terraria;
 using static ModJam.Toughnesss.ToughnessTextures;
 using System;
 using System.Linq;
+using ModJam.Nets;
 using Terraria.ModLoader.IO;
 using System.IO;
-using ModJam.Nets;
 
 namespace ModJam.Toughnesss;
 /// <summary>
@@ -66,17 +66,6 @@ public class ToughnessNPC : GlobalNPC
     [NetField]
     public int paralysisTime = 10;
 
-    public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
-    {
-        base.SendExtraAI(npc, bitWriter, binaryWriter);
-    }
-
-    public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
-    {
-        base.ReceiveExtraAI(npc, bitReader, binaryReader);
-    }
-
-
     public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
         if (isResilient) {
@@ -132,4 +121,14 @@ public class ToughnessNPC : GlobalNPC
         base.ModifyHitByProjectile(npc, projectile, ref modifiers);
     }
     public override bool InstancePerEntity => true;
+
+    public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+    {
+        Logging.PublicLogger.Info(1);
+    }
+
+    public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+    {
+        Logging.PublicLogger.Info(1);
+    }
 }

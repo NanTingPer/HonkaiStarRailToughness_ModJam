@@ -1,7 +1,9 @@
 ﻿using ModJam.Toughnesss.ToughnessEffects;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -33,28 +35,26 @@ public class ToughnessOnHit : GlobalNPC
             SubToughnessLenght(npc, player, type);
             if (tougNpc.currentLenght <= 0) {
                 //apply
-                if(TEffect.Applys.TryGetValue(type, out var value)){
+                if (TEffect.Applys.TryGetValue(type, out var value)){
                     value.Invoke(npc).Apply(npc, item);
                 } else {
                     tougNpc.currentLenght = tougNpc.lengthMax;
                 }
             }
+            npc.netUpdate = true;
         }
-
         base.OnHitByItem(npc, player, item, hit, damageDone);
     }
 
     public override void OnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
     {
-        var tougNpc = npc.GetGlobalNPC<ToughnessNPC>();
+            var tougNpc = npc.GetGlobalNPC<ToughnessNPC>();
         //在这里进行削韧
-        if (tougNpc.ContainToughness(projectile, out var type) && 
+        if (tougNpc.ContainToughness(projectile, out var type) &&
             tougNpc.currentLenght > 0) {
-
             if (projectile.owner > player.Length) {
                 tougNpc.currentLenght -= 1;
-            }
-            else {
+            } else {
                 try {
                     var pla = player[projectile.owner];
                     SubToughnessLenght(npc, pla, type);
@@ -70,8 +70,10 @@ public class ToughnessOnHit : GlobalNPC
                     tougNpc.currentLenght = tougNpc.lengthMax;
                 }
             }
-        }
+            npc.netUpdate = true;
+            Logging.PublicLogger.Info(string.Join(',', tougNpc.types.Select(f => f.ToString())));
 
+        }
         base.OnHitByProjectile(npc, projectile, hit, damageDone);
     }
 

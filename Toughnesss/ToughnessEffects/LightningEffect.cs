@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using System.IO;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Terraria.ID;
+using Terraria.ModLoader.IO;
 
 namespace ModJam.Toughnesss.ToughnessEffects;
 
@@ -43,5 +45,4 @@ public class LightningEffect : TEffect
         npc.SubNPCLife(damage * 2, color: Violet);
         base.EndEffect(npc);
     }
-
 }

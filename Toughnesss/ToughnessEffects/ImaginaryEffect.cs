@@ -3,6 +3,8 @@ using static System.Net.Mime.MediaTypeNames;
 using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria;
+using System.IO;
+using Terraria.ModLoader.IO;
 
 namespace ModJam.Toughnesss.ToughnessEffects;
 
@@ -52,6 +54,4 @@ public class ImaginaryEffect : TEffect
     {
         time = 120;
     }
-
-
 }

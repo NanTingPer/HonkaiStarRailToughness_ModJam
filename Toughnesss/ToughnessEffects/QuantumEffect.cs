@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using System.IO;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Terraria.ID;
+using Terraria.ModLoader.IO;
 
 namespace ModJam.Toughnesss.ToughnessEffects;
 
@@ -58,5 +60,4 @@ public class QuantumEffect : TEffect
         npc.SubNPCLife(damage * 0.6f, color: Blue);
         base.EndEffect(npc);
     }
-
 }
