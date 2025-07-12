@@ -2,7 +2,7 @@
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 
-namespace ModJam;
+namespace ModJam.Toughnesss;
 
 public class ToughnessProjectile : GlobalProjectile
 {

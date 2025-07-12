@@ -1,4 +1,4 @@
-﻿namespace ModJam;
+﻿namespace ModJam.Toughnesss;
 public enum ToughnessTypes
 {
     /// <summary>

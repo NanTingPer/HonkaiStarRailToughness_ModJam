@@ -1,6 +1,6 @@
 ﻿using Terraria.ModLoader;
 
-namespace ModJam;
+namespace ModJam.Toughnesss;
 
 public class ToughnessItem : GlobalItem
 {

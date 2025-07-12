@@ -3,7 +3,7 @@ using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria.ModLoader;
 
-namespace ModJam;
+namespace ModJam.Toughnesss;
 
 public static class ToughnessTextures
 {
