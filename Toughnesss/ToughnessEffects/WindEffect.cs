@@ -39,7 +39,7 @@ public class WindEffect : TEffect
             }
         );
         //npc.StrikeNPC();
-        npc.life -= damage * 2;
+        npc.SubNPCLife(damage * 2);
         var rect = new Rectangle((int)npc.position.X, (int)npc.position.Y, 20, 20);
         CombatText.NewText(rect, Green, damage * 2);
         base.EndEffect(npc);

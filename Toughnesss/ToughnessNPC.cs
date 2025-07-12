@@ -29,8 +29,8 @@ public class ToughnessNPC : GlobalNPC
         var enumType = typeof(ToughnessTypes);
         var values = Enum.GetValues(enumType);
         IEnumerable<int> list = [];
-        for (int i = 0; list.Count() - 1 < 3; i++) {
-            list = list.Append(rand.Next(0, values.Length));
+        for (int i = 0; list.Count() < 3; i++) {
+            list = list.Append(rand.Next(0, values.Length - 1));
             list = list.Distinct();
         }
         tougnpc.types.Clear();
@@ -100,7 +100,7 @@ public class ToughnessNPC : GlobalNPC
 
     public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
     {
-        if (!ContainToughness(item, out _) && isResilient) {
+        if (!ContainToughness(item, out _) && isResilient && currentLenght > 0) {
             modifiers.FinalDamage *= NONBREAKINGDAMAGEIMMUNITY;
         }
         base.ModifyHitByItem(npc, player, item, ref modifiers);
@@ -108,7 +108,7 @@ public class ToughnessNPC : GlobalNPC
 
     public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
     {
-        if (!ContainToughness(projectile, out _) && isResilient) {
+        if (!ContainToughness(projectile, out _) && isResilient && currentLenght > 0) {
             modifiers.FinalDamage *= NONBREAKINGDAMAGEIMMUNITY;
         }
         base.ModifyHitByProjectile(npc, projectile, ref modifiers);

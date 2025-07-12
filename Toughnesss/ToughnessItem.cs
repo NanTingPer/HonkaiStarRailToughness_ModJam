@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
-using Terraria.Utilities;
 
 namespace ModJam.Toughnesss;
 
@@ -15,8 +14,10 @@ public class ToughnessItem : GlobalItem
 
     public override void SetDefaults(Item entity)
     {
-        if (type == ToughnessTypes.未设置) {
-            SetToughnessType();
+        if(entity.createTile == -1 && entity.damage != -1) {
+            if (type == ToughnessTypes.未设置) {
+                SetToughnessType();
+            }
         }
         base.SetDefaults(entity);
     }
@@ -38,7 +39,8 @@ public class ToughnessItem : GlobalItem
 
     public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
     {
-        tooltips.Add(new TooltipLine(Mod, "ModJam-ToughbessItemImage", "q"));
+        if(type != ToughnessTypes.未设置)
+            tooltips.Add(new TooltipLine(Mod, "ModJam-ToughbessItemImage", "q"));
         base.ModifyTooltips(item, tooltips);
     }
 

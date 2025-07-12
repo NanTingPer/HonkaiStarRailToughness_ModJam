@@ -52,9 +52,10 @@ public class ImaginaryEffect : TEffect
             }
         );
         //npc.StrikeNPC();
-        npc.life -= damage * 2;
+        npc.SubNPCLife(damage * 2);
         var rect = new Rectangle((int)npc.position.X, (int)npc.position.Y, 20, 20);
         CombatText.NewText(rect, YellowGreen, damage * 2);
+        npc.rotation = 0f;
         base.EndEffect(npc);
     }
 
