@@ -30,6 +30,7 @@ public class ImaginaryEffect : TEffect
         var dust = Dust.NewDustPerfect(rom, DustID.YellowStarDust);
         dust.noGravity = true;
         dust.velocity = Zero;
+        npc.rotation = 90f;
         base.SelfDraw(npc, spriteBatch, screenPos, drawColor);
     }
 

@@ -29,7 +29,7 @@ public class ToughnessNPC : GlobalNPC
         var enumType = typeof(ToughnessTypes);
         var values = Enum.GetValues(enumType);
         IEnumerable<int> list = [];
-        for (int i = 0; list.Count() < 3; i++) {
+        for (int i = 0; list.Count() - 1 < 3; i++) {
             list = list.Append(rand.Next(0, values.Length));
             list = list.Distinct();
         }

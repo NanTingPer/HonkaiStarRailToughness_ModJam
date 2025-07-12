@@ -4,7 +4,7 @@ public enum ToughnessTypes
     /// <summary>
     /// Quantum
     /// </summary>
-    量子,
+    量子 = 0,
 
     /// <summary>
     /// Wind
@@ -35,4 +35,6 @@ public enum ToughnessTypes
     /// Fir
     /// </summary>
     火,
+
+    未设置
 }
