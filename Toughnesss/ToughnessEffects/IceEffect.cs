@@ -15,11 +15,13 @@ public class IceEffect : TEffect
 
     protected override void SelfApply(NPC npc, Projectile proj)
     {
+        time = 60;
         nailPosition = npc.Center;
     }
 
     protected override void SelfApply(NPC npc, Item item)
     {
+        time = 60;
         nailPosition = npc.Center;
     }
 

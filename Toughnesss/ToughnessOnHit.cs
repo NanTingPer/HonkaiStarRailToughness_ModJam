@@ -1,4 +1,5 @@
 ﻿using ModJam.Toughnesss.ToughnessEffects;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -10,14 +11,25 @@ namespace ModJam.Toughnesss;
 /// </summary>
 public class ToughnessOnHit : GlobalNPC
 {
+    public readonly static Dictionary<ToughnessTypes, float> toughnessCoefficient = new()
+    {
+        { ToughnessTypes.物理, 2f },
+        { ToughnessTypes.火, 2f },
+        { ToughnessTypes.风, 1.5f },
+        { ToughnessTypes.雷, 1f },
+        { ToughnessTypes.冰, 1f },
+        { ToughnessTypes.量子, 0.5f },
+        { ToughnessTypes.虚数, 0.5f }
+    };
+
     public override void OnHitByItem(NPC npc, Player player, Item item, NPC.HitInfo hit, int damageDone)
     {
         var tougNpc = npc.GetGlobalNPC<ToughnessNPC>();
         //在这里进行削韧
         if (tougNpc.ContainToughness(item, out var type) && 
             tougNpc.currentLenght > 0) {
-            tougNpc.currentLenght -= 1 * player.GetModPlayer<ToughnessPlayer>().killEfficiency;
-            if(tougNpc.currentLenght <= 0) {
+            SubToughnessLenght(npc, player, type);
+            if (tougNpc.currentLenght <= 0) {
                 //apply
                 if(TEffect.Applys.TryGetValue(type, out var value)){
                     value.Invoke(npc).Apply(npc, item);
@@ -43,9 +55,9 @@ public class ToughnessOnHit : GlobalNPC
             else {
                 try {
                     var pla = player[projectile.owner];
-                    tougNpc.currentLenght -= 1 * pla.GetModPlayer<ToughnessPlayer>().killEfficiency;
+                    SubToughnessLenght(npc, pla, type);
                 } catch {
-                    tougNpc.currentLenght -= 1;
+                    tougNpc.currentLenght -= 0.5f;
                 }
             }
             if(tougNpc.currentLenght <= 0) {
@@ -59,5 +71,11 @@ public class ToughnessOnHit : GlobalNPC
         }
 
         base.OnHitByProjectile(npc, projectile, hit, damageDone);
+    }
+
+    public void SubToughnessLenght(NPC npc, Player player, ToughnessTypes type)
+    {
+        var tougNpc = npc.GetGlobalNPC<ToughnessNPC>();
+        tougNpc.currentLenght -= (1 * player.GetModPlayer<ToughnessPlayer>().killEfficiency) * toughnessCoefficient[type];
     }
 }

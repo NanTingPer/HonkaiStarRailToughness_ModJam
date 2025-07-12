@@ -58,7 +58,7 @@ public class ToughnessNPC : GlobalNPC
     /// <summary>
     /// 瘫痪时间
     /// </summary>
-    public int paralysisTime = 60;
+    public int paralysisTime = 10;
     public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
         if (isResilient) {
