@@ -1,0 +1,47 @@
+Mods: {
+	HonkaiStarRailToughness: {
+		Items: {
+			SilverWolf: {
+				DisplayName: Silver Wolf
+				Tooltip: Now you can break any attack
+			}
+
+			UpFir: {
+				DisplayName: Up Fir
+				Tooltip: Right-click to change the weapon into a firebreaker
+			}
+
+			UpIce: {
+				DisplayName: Up Ice
+				Tooltip: Right-click to change the weapon into a icebreaker
+			}
+
+			UpImaginary: {
+				DisplayName: Up Imaginary
+				Tooltip: Right-click to change the weapon into a Imaginarybreaker
+			}
+
+			UpLightning: {
+				DisplayName: Up Lightning
+				Tooltip: Right-click to change the weapon into a Lightningbreaker
+			}
+
+			UpPhysical: {
+				DisplayName: Up Physical
+				Tooltip: Right-click to change the weapon into a Physicalbreaker
+			}
+
+			UpQuantum: {
+				DisplayName: Up Quantum
+				Tooltip: Right-click to change the weapon into a Quantumbreaker
+			}
+
+			UpWind: {
+				DisplayName: Up Wind
+				Tooltip: Right-click to change the weapon into a Windbreaker
+			}
+		}
+	}
+
+	Fairy: Any Fairy
+}

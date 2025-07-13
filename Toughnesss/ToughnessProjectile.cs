@@ -2,7 +2,7 @@
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 
-namespace ModJam.Toughnesss;
+namespace HonkaiStarRailToughness.Toughnesss;
 
 public class ToughnessProjectile : GlobalProjectile
 {

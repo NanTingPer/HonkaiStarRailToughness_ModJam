@@ -1,10 +1,10 @@
-﻿using ModJam.Nets;
-using ModJam.Toughnesss.ToughnessEffects;
+﻿using HonkaiStarRailToughness.Nets;
+using HonkaiStarRailToughness.Toughnesss.ToughnessEffects;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace ModJam.Toughnesss;
+namespace HonkaiStarRailToughness.Toughnesss;
 
 /// <summary>
 /// OnHit只进行削韧与应用瘫痪效果

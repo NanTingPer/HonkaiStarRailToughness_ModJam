@@ -1,5 +1,5 @@
 ﻿#pragma warning disable CA2255
-using ModJam.Toughnesss;
+using HonkaiStarRailToughness.Toughnesss;
 using MonoMod.RuntimeDetour;
 using System;
 using System.Collections;
@@ -14,7 +14,7 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.Core;
 using Terraria.ModLoader.IO;
 
-namespace ModJam.Nets;
+namespace HonkaiStarRailToughness.Nets;
 
 [AttributeUsage(AttributeTargets.Field)]
 public class NetFieldAttribute : Attribute;
@@ -74,7 +74,7 @@ public static class NPCAutoNet
     [ModuleInitializer]
     internal static void InitNPCAutoNet()
     {
-        var gtypes = typeof(ModJam).Assembly.GetTypes()
+        var gtypes = typeof(HonkaiStarRailToughness).Assembly.GetTypes()
             .Where(f => f.IsSubclassOf(typeof(GlobalNPC)) &&
                 f.IsAbstract == false
             );

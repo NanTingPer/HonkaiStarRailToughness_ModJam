@@ -1,16 +1,16 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using ModJam.Nets;
+using HonkaiStarRailToughness.Nets;
 using System.IO;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader.IO;
 
-namespace ModJam.Toughnesss.ToughnessEffects;
+namespace HonkaiStarRailToughness.Toughnesss.ToughnessEffects;
 
 /// <summary>
 /// 物理
-/// <para>造成生命百分比伤害，瘫痪时间240</para>
+/// <para>造成生命百分比伤害</para>
 /// </summary>
 public class PhysicalEffect : TEffect
 {
@@ -44,7 +44,7 @@ public class PhysicalEffect : TEffect
 
     protected override void SelfDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 2; i++) {
             var rom = npc.position + RandomVector2(rand, -npc.height, npc.height);
             var dust = Dust.NewDustPerfect(rom, DustID.PlanteraBulb);
             dust.noGravity = true;

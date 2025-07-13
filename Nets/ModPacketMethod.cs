@@ -1,8 +1,8 @@
-﻿using ModJam.Toughnesss;
+﻿using HonkaiStarRailToughness.Toughnesss;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace ModJam.Nets;
+namespace HonkaiStarRailToughness.Nets;
 
 public static class ModPacketMethod
 {

@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-namespace ModJam.Toughnesss;
+namespace HonkaiStarRailToughness.Toughnesss;
 
 public class ToughnessItem : GlobalItem
 {

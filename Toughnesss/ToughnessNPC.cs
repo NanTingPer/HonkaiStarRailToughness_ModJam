@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using Terraria.ModLoader;
 using Terraria;
-using static ModJam.Toughnesss.ToughnessTextures;
+using static HonkaiStarRailToughness.Toughnesss.ToughnessTextures;
 using System;
 using System.Linq;
-using ModJam.Nets;
+using HonkaiStarRailToughness.Nets;
 using Terraria.ModLoader.IO;
 using System.IO;
 
-namespace ModJam.Toughnesss;
+namespace HonkaiStarRailToughness.Toughnesss;
 /// <summary>
 /// 带有韧性条的NPC
 /// </summary>
@@ -18,7 +18,7 @@ public class ToughnessNPC : GlobalNPC
     /// <summary>
     /// 非破韧伤害只生效比例
     /// </summary>
-    public const float NONBREAKINGDAMAGEIMMUNITY = 0.2F;
+    public const float NONBREAKINGDAMAGEIMMUNITY = 0.6F;
 
     public override void SetDefaults(NPC entity)
     {
@@ -54,12 +54,12 @@ public class ToughnessNPC : GlobalNPC
     /// 最大韧性长度
     /// </summary>
     [NetField]
-    public float lengthMax = 10;
+    public float lengthMax = 20;
     /// <summary>
     /// 当前韧性长度
     /// </summary>
     [NetField]
-    public float currentLenght = 10;
+    public float currentLenght = 20;
     /// <summary>
     /// 瘫痪时间
     /// </summary>

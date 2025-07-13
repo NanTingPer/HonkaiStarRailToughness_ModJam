@@ -1,0 +1,47 @@
+Mods: {
+	HonkaiStarRailToughness: {
+		Items: {
+			SilverWolf: {
+				DisplayName: 银狼
+				Tooltip: 现在你的任何攻击都能破韧
+			}
+
+			UpFir: {
+				DisplayName: 火属性
+				Tooltip: 右键将手持武器变为火系破韧
+			}
+
+			UpIce: {
+				DisplayName: 冰属性
+				Tooltip: 右键将手持武器变为冰系破韧
+			}
+
+			UpImaginary: {
+				DisplayName: 虚数属性
+				Tooltip: 右键将手持武器变为虚数破韧
+			}
+
+			UpLightning: {
+				DisplayName: 雷属性
+				Tooltip: 右键将手持武器变为雷系破韧
+			}
+
+			UpPhysical: {
+				DisplayName: 物理属性
+				Tooltip: 右键将手持武器变为物理破韧
+			}
+
+			UpQuantum: {
+				DisplayName: 量子属性
+				Tooltip: 右键将手持武器变为量子破韧
+			}
+
+			UpWind: {
+				DisplayName: 风属性
+				Tooltip: 右键将手持武器变为风系破韧
+			}
+		}
+	}
+
+	// Fairy: Any Fairy
+}

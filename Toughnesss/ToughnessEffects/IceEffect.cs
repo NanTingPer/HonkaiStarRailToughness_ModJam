@@ -1,11 +1,12 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using ModJam.Nets;
+using HonkaiStarRailToughness.Nets;
 using Terraria;
 
-namespace ModJam.Toughnesss.ToughnessEffects;
+namespace HonkaiStarRailToughness.Toughnesss.ToughnessEffects;
 
 /// <summary>
 /// 冰破韧效果
+/// <para>冻住敌人2秒</para>
 /// </summary>
 public class IceEffect : TEffect
 {

@@ -3,11 +3,11 @@ using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria.ModLoader;
 
-namespace ModJam.Toughnesss;
+namespace HonkaiStarRailToughness.Toughnesss;
 
 public static class ToughnessTextures
 {
-    public static Dictionary<ToughnessTypes, Asset<Texture2D>> Textures = [];
+    public readonly static Dictionary<ToughnessTypes, Asset<Texture2D>> Textures = [];
     static ToughnessTextures()
     {
         Textures[ToughnessTypes.冰] = 冰  ;
@@ -21,7 +21,7 @@ public static class ToughnessTextures
         WhiteTexture.SetData([White]);
     }
 
-    private const string BasePath = "ModJam/Textures/";
+    private const string BasePath = "HonkaiStarRailToughness/Textures/";
     public static readonly Texture2D WhiteTexture;
     public static readonly Asset<Texture2D> 冰  = ModContent.Request<Texture2D>(BasePath + nameof(冰), AssetRequestMode.ImmediateLoad);
     public static readonly Asset<Texture2D> 火  = ModContent.Request<Texture2D>(BasePath + nameof(火), AssetRequestMode.ImmediateLoad);

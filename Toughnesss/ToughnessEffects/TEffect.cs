@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using ModJam.Nets;
+using HonkaiStarRailToughness.Nets;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +8,7 @@ using static Terraria.ID.NetmodeID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-namespace ModJam.Toughnesss.ToughnessEffects;
+namespace HonkaiStarRailToughness.Toughnesss.ToughnessEffects;
 
 public abstract class TEffect : GlobalNPC
 {
@@ -116,6 +116,8 @@ public abstract class TEffect : GlobalNPC
     {
         if(time > 0) {
             SelfModifyHitByItem(npc, player, item, ref modifiers);
+        } else {
+            modifiers.FinalDamage *= 0.8f;
         }
         base.ModifyHitByItem(npc, player, item, ref modifiers);
     }
@@ -124,6 +126,8 @@ public abstract class TEffect : GlobalNPC
     {
         if(time > 0) {
             SelfModifyHitByProjectile(npc, projectile, ref modifiers);
+        } else {
+            modifiers.FinalDamage *= 0.8f;
         }
         base.ModifyHitByProjectile(npc, projectile, ref modifiers);
     }

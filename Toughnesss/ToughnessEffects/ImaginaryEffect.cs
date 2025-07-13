@@ -5,12 +5,14 @@ using Terraria.ID;
 using Terraria;
 using System.IO;
 using Terraria.ModLoader.IO;
-using ModJam.Nets;
+using HonkaiStarRailToughness.Nets;
 
-namespace ModJam.Toughnesss.ToughnessEffects;
+namespace HonkaiStarRailToughness.Toughnesss.ToughnessEffects;
 
 /// <summary>
 /// 虚数
+/// <para>敌人速度 减半</para>
+/// <para>受到的伤害 +40%</para>
 /// </summary>
 public class ImaginaryEffect : TEffect
 {
@@ -19,13 +21,13 @@ public class ImaginaryEffect : TEffect
     /// </summary>
     protected override void SelfAI(NPC npc)
     {
-        npc.velocity *= 0.8f;
+        npc.velocity *= 0.5f;
         base.SelfAI(npc);
     }
 
     protected override void SelfDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 2; i++) {
             var rom = npc.position + RandomVector2(rand, -npc.height, npc.height);
             var dust = Dust.NewDustPerfect(rom, DustID.YellowStarDust);
             dust.noGravity = true;
@@ -56,5 +58,17 @@ public class ImaginaryEffect : TEffect
     protected override void SelfApply(NPC npc, Item item)
     {
         time = 120;
+    }
+
+    protected override void SelfModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
+    {
+        modifiers.FinalDamage *= 1.4f;
+        base.SelfModifyHitByItem(npc, player, item, ref modifiers);
+    }
+
+    protected override void SelfModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
+    {
+        modifiers.FinalDamage *= 1.4f;
+        base.SelfModifyHitByProjectile(npc, projectile, ref modifiers);
     }
 }

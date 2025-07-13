@@ -2,7 +2,7 @@
 using Terraria;
 using Terraria.ModLoader.IO;
 
-namespace ModJam.Toughnesss.ToughnessEffects;
+namespace HonkaiStarRailToughness.Toughnesss.ToughnessEffects;
 
 public static class ToughnessKillNPC
 {

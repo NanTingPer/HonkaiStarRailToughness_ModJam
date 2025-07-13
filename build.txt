@@ -1,3 +1,4 @@
-displayName = ModJam
+displayName = HonkaiStarRailToughness
 author = n
 version = 0.1
+includeSource = true

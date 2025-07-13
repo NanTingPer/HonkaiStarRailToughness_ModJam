@@ -3,10 +3,11 @@ using Terraria;
 using Terraria.GameContent.Drawing;
 using Terraria.ID;
 
-namespace ModJam.Toughnesss.ToughnessEffects;
+namespace HonkaiStarRailToughness.Toughnesss.ToughnessEffects;
 
 /// <summary>
 /// 火
+/// <para>受到2次武器伤害2倍的伤害</para>
 /// </summary>
 public class FirEffect : TEffect
 {

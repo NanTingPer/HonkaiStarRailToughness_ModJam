@@ -1,4 +1,4 @@
-﻿namespace ModJam.Toughnesss;
+﻿namespace HonkaiStarRailToughness.Toughnesss;
 public enum ToughnessTypes
 {
     /// <summary>

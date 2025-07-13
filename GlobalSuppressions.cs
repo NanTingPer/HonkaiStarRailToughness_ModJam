@@ -5,4 +5,4 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Usage", "CA2255:不应在库中使用 “ModuleInitializer” 属性", Justification = "<挂起>", Scope = "member", Target = "~M:ModJam.Nets.NPCAutoNet.InitNPCAutoNet")]
+[assembly: SuppressMessage("Usage", "CA2255:不应在库中使用 “ModuleInitializer” 属性", Justification = "<挂起>", Scope = "member", Target = "~M:HonkaiStarRailToughness.Nets.NPCAutoNet.InitNPCAutoNet")]
