@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using ModJam.Nets;
 using System.IO;
 using Terraria;
 using Terraria.GameContent.Drawing;

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
+using static Terraria.ID.NetmodeID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -22,6 +23,17 @@ public abstract class TEffect : GlobalNPC
         { ToughnessTypes.雷, (npc) => npc.GetGlobalNPC<LightningEffect>() }
     };
 
+    private static Dictionary<Type, ToughnessTypes> TTT { get; } = new()
+    {
+        { typeof(PhysicalEffect), ToughnessTypes.物理 },
+        { typeof(IceEffect), ToughnessTypes.冰 },
+        { typeof(WindEffect), ToughnessTypes.风 },
+        { typeof(FirEffect), ToughnessTypes.火 },
+        { typeof(QuantumEffect), ToughnessTypes.量子 },
+        { typeof(ImaginaryEffect), ToughnessTypes.虚数 },
+        { typeof(LightningEffect), ToughnessTypes.雷 },
+    };
+
     [NetField]
     public int time = -1;
     /// <summary>
@@ -35,6 +47,11 @@ public abstract class TEffect : GlobalNPC
     /// </summary>
     public void Apply(NPC npc, Projectile proj)
     {
+        if (netMode != Server && netMode != SinglePlayer) {
+            var type = TTT[this.GetType()];
+            Mod.GetPacket().SendApplyEffect(type, npc);
+            Logging.PublicLogger.Info("Client-SendApplyEffect :  " + type.ToString());
+        }
         SetTime(npc);
         damage = proj.damage;
         SelfApply(npc, proj);
@@ -42,6 +59,11 @@ public abstract class TEffect : GlobalNPC
     }
     public void Apply(NPC npc, Item item)
     {
+        if (netMode != Server && netMode != SinglePlayer) {
+            var type = TTT[this.GetType()];
+            Mod.GetPacket().SendApplyEffect(type, npc);
+            Logging.PublicLogger.Info("Client-SendApplyEffect :  " + type.ToString());
+        }
         SetTime(npc);
         damage = item.damage;
         SelfApply(npc, item);

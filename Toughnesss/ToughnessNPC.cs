@@ -124,11 +124,9 @@ public class ToughnessNPC : GlobalNPC
 
     public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
     {
-        Logging.PublicLogger.Info(1);
     }
 
     public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
     {
-        Logging.PublicLogger.Info(1);
     }
 }

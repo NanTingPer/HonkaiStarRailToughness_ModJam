@@ -1,4 +1,5 @@
-﻿using ModJam.Toughnesss.ToughnessEffects;
+﻿using ModJam.Nets;
+using ModJam.Toughnesss.ToughnessEffects;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -41,6 +42,7 @@ public class ToughnessOnHit : GlobalNPC
                     tougNpc.currentLenght = tougNpc.lengthMax;
                 }
             }
+            Mod.GetPacket().SendSubLength(npc);
             npc.netUpdate = true;
         }
         base.OnHitByItem(npc, player, item, hit, damageDone);
@@ -70,8 +72,9 @@ public class ToughnessOnHit : GlobalNPC
                     tougNpc.currentLenght = tougNpc.lengthMax;
                 }
             }
+            Mod.GetPacket().SendSubLength(npc);
             npc.netUpdate = true;
-            Logging.PublicLogger.Info(string.Join(',', tougNpc.types.Select(f => f.ToString())));
+            //Logging.PublicLogger.Info(string.Join(',', tougNpc.types.Select(f => f.ToString())));
 
         }
         base.OnHitByProjectile(npc, projectile, hit, damageDone);
@@ -80,6 +83,13 @@ public class ToughnessOnHit : GlobalNPC
     public void SubToughnessLenght(NPC npc, Player player, ToughnessTypes type)
     {
         var tougNpc = npc.GetGlobalNPC<ToughnessNPC>();
+        tougNpc.currentLenght -= (1 * player.GetModPlayer<ToughnessPlayer>().killEfficiency) * toughnessCoefficient[type];
+    }
+
+    public void SubToughnessLenght(NPC npc, Player player, Item item)
+    {
+        var tougNpc = npc.GetGlobalNPC<ToughnessNPC>();
+        var type = item.GetGlobalItem<ToughnessItem>().type;
         tougNpc.currentLenght -= (1 * player.GetModPlayer<ToughnessPlayer>().killEfficiency) * toughnessCoefficient[type];
     }
 }

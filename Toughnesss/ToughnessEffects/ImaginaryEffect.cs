@@ -5,6 +5,7 @@ using Terraria.ID;
 using Terraria;
 using System.IO;
 using Terraria.ModLoader.IO;
+using ModJam.Nets;
 
 namespace ModJam.Toughnesss.ToughnessEffects;
 

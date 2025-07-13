@@ -4,6 +4,8 @@ using System.IO;
 using Terraria;
 using Terraria.ModLoader.IO;
 
+
+
 namespace ModJam.Toughnesss.ToughnessEffects;
 
 /// <summary>
