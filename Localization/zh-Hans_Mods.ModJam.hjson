@@ -1,0 +1,6 @@
+Items: {
+	SilverWolf: {
+		// DisplayName: Silver Wolf
+		// Tooltip: 你的武器可以为敌人添加响应的弱点
+	}
+}

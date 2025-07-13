@@ -15,10 +15,12 @@ public class LightningEffect : TEffect
 {    
     protected override void SelfDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
-        var rom = npc.position + RandomVector2(rand, -npc.height, npc.height);
-        var dust = Dust.NewDustPerfect(rom, DustID.VioletMoss);
-        dust.noGravity = true;
-        dust.velocity = Zero;
+        for (int i = 0; i < 10; i++) {
+            var rom = npc.position + RandomVector2(rand, -npc.height, npc.height);
+            var dust = Dust.NewDustPerfect(rom, DustID.VioletMoss);
+            dust.noGravity = true;
+            dust.velocity = Zero;
+        }
         base.SelfDraw(npc, spriteBatch, screenPos, drawColor);
     }
 

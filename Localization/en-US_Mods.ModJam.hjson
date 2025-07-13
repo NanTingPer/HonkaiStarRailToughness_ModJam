@@ -1,1 +1,6 @@
-
+Items: {
+	SilverWolf: {
+		DisplayName: Silver Wolf
+		Tooltip: Your weapon gives the enemy a corresponding amount of weakness
+	}
+}

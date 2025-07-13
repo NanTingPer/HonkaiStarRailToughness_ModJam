@@ -1,10 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using ModJam.Nets;
-using System.IO;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Terraria.ID;
-using Terraria.ModLoader.IO;
 
 namespace ModJam.Toughnesss.ToughnessEffects;
 

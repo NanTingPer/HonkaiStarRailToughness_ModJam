@@ -101,7 +101,7 @@ public class ToughnessNPC : GlobalNPC
     public bool ContainToughness(Projectile projectile, out ToughnessTypes type)
     {
         var tougProject = projectile.GetGlobalProjectile<ToughnessProjectile>();
-        type = tougProject.Type;
+        type = tougProject.type;
         return types.Contains(type);
     }
 

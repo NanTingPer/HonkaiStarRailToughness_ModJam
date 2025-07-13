@@ -47,11 +47,11 @@ public abstract class TEffect : GlobalNPC
     /// </summary>
     public void Apply(NPC npc, Projectile proj)
     {
-        if (netMode != Server && netMode != SinglePlayer) {
-            var type = TTT[this.GetType()];
-            Mod.GetPacket().SendApplyEffect(type, npc);
-            Logging.PublicLogger.Info("Client-SendApplyEffect :  " + type.ToString());
-        }
+        //if (netMode != Server && netMode != SinglePlayer) {
+        //    var type = TTT[this.GetType()];
+        //    Mod.GetPacket().SendApplyEffect(type, npc);
+        //    Logging.PublicLogger.Info("Client-SendApplyEffect :  " + type.ToString());
+        //}
         SetTime(npc);
         damage = proj.damage;
         SelfApply(npc, proj);
@@ -59,17 +59,16 @@ public abstract class TEffect : GlobalNPC
     }
     public void Apply(NPC npc, Item item)
     {
-        if (netMode != Server && netMode != SinglePlayer) {
-            var type = TTT[this.GetType()];
-            Mod.GetPacket().SendApplyEffect(type, npc);
-            Logging.PublicLogger.Info("Client-SendApplyEffect :  " + type.ToString());
-        }
+        //if (netMode != Server && netMode != SinglePlayer) {
+        //    var type = TTT[this.GetType()];
+        //    Mod.GetPacket().SendApplyEffect(type, npc);
+        //    Logging.PublicLogger.Info("Client-SendApplyEffect :  " + type.ToString());
+        //}
         SetTime(npc);
         damage = item.damage;
         SelfApply(npc, item);
         npc.netUpdate = true;
     }
-
 
     protected abstract void SelfApply(NPC npc, Projectile proj);
     protected abstract void SelfApply(NPC npc, Item item);

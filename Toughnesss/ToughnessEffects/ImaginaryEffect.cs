@@ -25,10 +25,12 @@ public class ImaginaryEffect : TEffect
 
     protected override void SelfDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
-        var rom = npc.position + RandomVector2(rand, -npc.height, npc.height);
-        var dust = Dust.NewDustPerfect(rom, DustID.YellowStarDust);
-        dust.noGravity = true;
-        dust.velocity = Zero;
+        for (int i = 0; i < 10; i++) {
+            var rom = npc.position + RandomVector2(rand, -npc.height, npc.height);
+            var dust = Dust.NewDustPerfect(rom, DustID.YellowStarDust);
+            dust.noGravity = true;
+            dust.velocity = Zero;
+        }
         npc.rotation = 90f;
         base.SelfDraw(npc, spriteBatch, screenPos, drawColor);
     }
