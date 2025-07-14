@@ -116,8 +116,6 @@ public abstract class TEffect : GlobalNPC
     {
         if(time > 0) {
             SelfModifyHitByItem(npc, player, item, ref modifiers);
-        } else {
-            modifiers.FinalDamage *= 0.8f;
         }
         base.ModifyHitByItem(npc, player, item, ref modifiers);
     }
@@ -126,8 +124,6 @@ public abstract class TEffect : GlobalNPC
     {
         if(time > 0) {
             SelfModifyHitByProjectile(npc, projectile, ref modifiers);
-        } else {
-            modifiers.FinalDamage *= 0.8f;
         }
         base.ModifyHitByProjectile(npc, projectile, ref modifiers);
     }

@@ -44,12 +44,10 @@ public class PhysicalEffect : TEffect
 
     protected override void SelfDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
-        for (int i = 0; i < 2; i++) {
-            var rom = npc.position + RandomVector2(rand, -npc.height, npc.height);
-            var dust = Dust.NewDustPerfect(rom, DustID.PlanteraBulb);
-            dust.noGravity = true;
-            dust.velocity = Zero;
-        }
+        var rom = npc.Center + RandomVector2(rand, -npc.height, npc.height);
+        var dust = Dust.NewDustPerfect(rom, DustID.PlanteraBulb);
+        dust.noGravity = true;
+        dust.velocity = Zero;
         base.SelfDraw(npc, spriteBatch, screenPos, drawColor);
     }
 }

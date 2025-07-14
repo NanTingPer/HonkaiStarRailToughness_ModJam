@@ -62,7 +62,7 @@ public class SilverWolf : ModItem
         var v2 = FontAssets.MouseText.Value.MeasureString(maxl);
 
         //204 * 204
-        var rect = new Rectangle(x - 20, y - 20, (int)(v2.X * 2.3), (int)(v2.X * 2.3));
+        var rect = new Rectangle(x - 20, y - 20, (int)(v2.X * 2.3), 150);
         spriteBatch.End();
         spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, UIScaleMatrix);
         spriteBatch.Draw(whiteTexture, rect, null, White, 0f, Zero, SpriteEffects.None, 1f);

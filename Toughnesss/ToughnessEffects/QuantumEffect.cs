@@ -1,10 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using HonkaiStarRailToughness.Nets;
-using System.IO;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Terraria.ID;
-using Terraria.ModLoader.IO;
 
 namespace HonkaiStarRailToughness.Toughnesss.ToughnessEffects;
 
@@ -43,12 +40,12 @@ public class QuantumEffect : TEffect
 
     protected override void SelfApply(NPC npc, Projectile proj)
     {
-        time = 60;
+        time = 120;
     }
 
     protected override void SelfApply(NPC npc, Item item)
     {
-        time = 60;
+        time = 120;
     }
 
     protected override void EndEffect(NPC npc)

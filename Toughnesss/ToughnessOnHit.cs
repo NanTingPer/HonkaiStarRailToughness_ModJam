@@ -14,10 +14,10 @@ public class ToughnessOnHit : GlobalNPC
 {
     public readonly static Dictionary<ToughnessTypes, float> toughnessCoefficient = new()
     {
-        { ToughnessTypes.物理, 2f },
+        { ToughnessTypes.物理, 0.5f },
         { ToughnessTypes.火, 2f },
-        { ToughnessTypes.风, 1.5f },
-        { ToughnessTypes.雷, 1f },
+        { ToughnessTypes.风, 2f },
+        { ToughnessTypes.雷, 2f },
         { ToughnessTypes.冰, 1f },
         { ToughnessTypes.量子, 0.5f },
         { ToughnessTypes.虚数, 0.5f }

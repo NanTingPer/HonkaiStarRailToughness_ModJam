@@ -37,12 +37,13 @@ public class ToughnessPlayer : ModPlayer
 
     public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
     {
-        var gnpc = target.GetGlobalNPC<ToughnessNPC>();
-        var item = Player.HeldItem;
-        if (!gnpc.ContainToughness(item, out var type)) {
-            gnpc.types.Add(type);
+        if (silverWolf) {
+            var gnpc = target.GetGlobalNPC<ToughnessNPC>();
+            var item = Player.HeldItem;
+            if (!gnpc.ContainToughness(item, out var type)) {
+                gnpc.types.Add(type);
+            }
         }
-
         base.ModifyHitNPC(target, ref modifiers);
     }
 }

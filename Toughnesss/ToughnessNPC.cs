@@ -46,6 +46,7 @@ public class ToughnessNPC : GlobalNPC
     /// 是否是含有弱点的NPC
     /// </summary>
     public bool isResilient = true;
+    public bool isToughness = false;
     /// <summary>
     /// 此NPC拥有的弱点
     /// </summary>
@@ -107,7 +108,7 @@ public class ToughnessNPC : GlobalNPC
 
     public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
     {
-        if (!ContainToughness(item, out _) && isResilient && currentLenght > 0) {
+        if (/*!ContainToughness(item, out _) && */isResilient && currentLenght > 0) {
             modifiers.FinalDamage *= NONBREAKINGDAMAGEIMMUNITY;
         }
         base.ModifyHitByItem(npc, player, item, ref modifiers);
@@ -115,7 +116,7 @@ public class ToughnessNPC : GlobalNPC
 
     public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
     {
-        if (!ContainToughness(projectile, out _) && isResilient && currentLenght > 0) {
+        if (/*!ContainToughness(projectile, out _) && */isResilient && currentLenght > 0) {
             modifiers.FinalDamage *= NONBREAKINGDAMAGEIMMUNITY;
         }
         base.ModifyHitByProjectile(npc, projectile, ref modifiers);
